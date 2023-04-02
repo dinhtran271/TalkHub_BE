@@ -19,9 +19,5 @@ To run your application:
 ./gradlew clean run
 ```
 
-== Documentation
 
-=== SRS
-
-=== ERD
 
