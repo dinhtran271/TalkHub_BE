@@ -3,5 +3,7 @@
 /gradle/
 /logs/
 /build/
+/bin/
+*.vscode
 *.jar
 *.log
