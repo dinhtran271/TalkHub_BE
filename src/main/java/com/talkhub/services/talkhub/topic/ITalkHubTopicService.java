@@ -8,5 +8,6 @@ public interface ITalkHubTopicService {
     JsonObject updateLike(long topicId);
     JsonObject updateView(long topicId);
     JsonObject getAllByUser(long userId);
-    JsonObject delete(long postId);
+    JsonObject getById(long topicId);
+    JsonObject delete(long topicId);
 }

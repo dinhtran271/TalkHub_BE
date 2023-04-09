@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 
 public interface ITalkHubBookmarkService {
     JsonObject create(JsonObject data);
-    JsonObject update(JsonObject data);
-    JsonObject delete(long bookmarkId);
+    JsonObject delete(long useriI, long topicId);
     JsonObject getAllByUser(long userId);
 }
