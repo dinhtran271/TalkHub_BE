@@ -20,4 +20,5 @@ To run your application:
 ```
 
 
-
+== ERD
+https://drive.google.com/file/d/1Z3FhhR4a7wcdWpYRwejZXUEND25ZtuFZ/view?usp=share_link
