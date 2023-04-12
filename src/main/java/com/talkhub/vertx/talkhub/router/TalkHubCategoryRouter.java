@@ -51,4 +51,17 @@ public class TalkHubCategoryRouter {
         }
     }
 
+    public static void delete(RoutingContext rc) {
+        try {
+            long cateId = Long.parseLong(rc.request().getParam("categoryid"));
+            JsonObject res = TalkHubServices.talkHubCategoryService.delete(cateId);
+            rc.response().end(res.toString());
+        } catch (Exception e) {
+            String stacktrace = ExceptionUtils.getStackTrace(e);
+            DebugLogger.error(stacktrace);
+            JsonObject res = BaseResponse.createFullMessageResponse(1, "system_error");
+            rc.response().end(res.toString());
+        }
+    }
+
 }
