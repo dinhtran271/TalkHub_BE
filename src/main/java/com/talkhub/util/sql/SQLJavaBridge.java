@@ -433,7 +433,8 @@ public class SQLJavaBridge {
             st.executeUpdate();
             rs = st.getGeneratedKeys();
             if(rs.next()) {
-                long id = rs.getLong(primaryKey);
+                String insert_key = new StringBuilder("insert_").append(primaryKey).toString();
+                long id = rs.getLong(insert_key);
                 json.addProperty(primaryKey, id);
             }
         } catch (Exception e) {

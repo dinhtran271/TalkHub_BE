@@ -48,10 +48,11 @@ CREATE TABLE follow
     PRIMARY KEY(userid, otherid)
 );
 
-CREATE TABLE book_mark
+CREATE TABLE bookmark
 (
     userid BIGINT NOT NULL,
     topicid BIGINT NOT NULL,
     PRIMARY KEY (userid, topicid)
 );
+
 

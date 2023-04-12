@@ -15,7 +15,10 @@ public class TalkHubBookmarkService implements ITalkHubBookmarkService{
     public JsonObject create(JsonObject data) {
         try {
             SQLJavaBridge bridge = HikariClients.instance().defaulSQLJavaBridge();
-            bridge.insertObjectToDB("bookmark", "userid", data);
+            long userId = data.get("userid").getAsLong();
+            long topicId = data.get("topicid").getAsLong();
+            String query = "INSERT INTO bookmark(userid, topicid) VALUES (?,?)";
+            bridge.update(query, userId, topicId);
             return BaseResponse.createFullMessageResponse(0, "success");
         } catch (Exception e) {
             String stacktrace = ExceptionUtils.getStackTrace(e);
