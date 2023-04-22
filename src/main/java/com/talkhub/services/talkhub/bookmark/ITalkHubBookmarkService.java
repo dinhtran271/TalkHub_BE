@@ -6,4 +6,5 @@ public interface ITalkHubBookmarkService {
     JsonObject create(JsonObject data);
     JsonObject delete(long useriI, long topicId);
     JsonObject getAllTopicBookmark(long userId);
+    boolean isMarked(long userId, long topicId);
 }

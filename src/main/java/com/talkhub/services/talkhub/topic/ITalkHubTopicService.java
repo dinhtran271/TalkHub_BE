@@ -8,9 +8,14 @@ public interface ITalkHubTopicService {
     JsonObject updateLike(long topicId);
     JsonObject updateView(long topicId);
     JsonObject getAllByUser(long userId);
-    JsonObject getById(long topicId);
+    JsonObject getById(long topicId, long userId);
     JsonObject delete(long topicId);
     JsonObject getAllByCategory(long categoryId, int page, int count);
-    JsonObject getAllByTag(String tagId, int page, int count);
+    JsonObject getAllByTag(long tagId, int page, int count);
     JsonObject getAll(int page, int count);
+    long getUserId(long topciid);
+    JsonObject getLatest();
+    JsonObject getPopularOnDay();
+    JsonObject filter(String str, int page, int count);
+
 }

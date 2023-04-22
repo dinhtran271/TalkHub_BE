@@ -66,5 +66,4 @@ public class TalkHubCategoryService implements ITalkHubCategoryService {
             return BaseResponse.createFullMessageResponse(1, "system_error");
         }
     }
-    
 }

@@ -13,9 +13,10 @@ import io.vertx.ext.web.RoutingContext;
 public class TalkHubPostRouter {
     public static void create(RoutingContext rc) {
         try {
+            long userId = Long.parseLong(rc.request().headers().get("userid"));
             String body = rc.body().asString();
             JsonObject data = GsonUtil.toJsonObject(body);
-            JsonObject res = TalkHubServices.talkHubPostService.create(data);
+            JsonObject res = TalkHubServices.talkHubPostService.create(userId, data);
             rc.response().end(res.toString());
         } catch (Exception e) {
             String stacktrace = ExceptionUtils.getStackTrace(e);
@@ -67,8 +68,8 @@ public class TalkHubPostRouter {
 
     public static void getAllByTopic(RoutingContext rc) {
         try {
-            long postId = Long.parseLong(rc.request().getParam("postid"));
-            JsonObject res = TalkHubServices.talkHubPostService.getAllByTopic(postId);
+            long topicid = Long.parseLong(rc.request().getParam("topicid"));
+            JsonObject res = TalkHubServices.talkHubPostService.getAllByTopic(topicid);
             rc.response().end(res.toString());
         } catch (Exception e) {
             String stacktrace = ExceptionUtils.getStackTrace(e);

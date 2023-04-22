@@ -13,8 +13,10 @@ import io.vertx.ext.web.RoutingContext;
 public class TalkHubBookMarkRouter {
     public static void create(RoutingContext rc) {
         try {
+            long userId = Long.parseLong(rc.request().headers().get("userid"));
             String body = rc.body().asString();
             JsonObject data = GsonUtil.toJsonObject(body);
+            data.addProperty("userid", userId);
             JsonObject res = TalkHubServices.talkHubBookmarkService.create(data);
             rc.response().end(res.toString());
         } catch (Exception e) {
@@ -38,10 +40,10 @@ public class TalkHubBookMarkRouter {
             rc.response().end(res.toString());
         }
     }
-    public static void getAllByUser(RoutingContext rc) {
+    public static void getAllTopicBookmark(RoutingContext rc) {
         try {
             long userId = Long.parseLong(rc.request().headers().get("userid"));
-            JsonObject res = TalkHubServices.talkHubBookmarkService.getAllByUser(userId);
+            JsonObject res = TalkHubServices.talkHubBookmarkService.getAllTopicBookmark(userId);
             rc.response().end(res.toString());
         } catch (Exception e) {
             String stacktrace = ExceptionUtils.getStackTrace(e);

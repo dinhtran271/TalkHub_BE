@@ -13,9 +13,10 @@ import io.vertx.ext.web.RoutingContext;
 public class TalkHubProfileRouter {
     public static void create(RoutingContext rc) {
         try {
+            long userId = Long.parseLong(rc.request().headers().get("userid"));
             String body = rc.body().asString();
             JsonObject data = GsonUtil.toJsonObject(body);
-            JsonObject res = TalkHubServices.talkHubProfileService.create(data);
+            JsonObject res = TalkHubServices.talkHubProfileService.create(userId,data);
             rc.response().end(res.toString());
         } catch (Exception e) {
             String stacktrace = ExceptionUtils.getStackTrace(e);
@@ -27,9 +28,11 @@ public class TalkHubProfileRouter {
 
     public static void update(RoutingContext rc) {
         try {
+            long userId = Long.parseLong(rc.request().headers().get("userid"));
             String body = rc.body().asString();
             JsonObject data = GsonUtil.toJsonObject(body);
-            JsonObject res = TalkHubServices.talkHubProfileService.create(data);
+            data.addProperty("userid", userId);
+            JsonObject res = TalkHubServices.talkHubProfileService.update(data);
             rc.response().end(res.toString());
         } catch (Exception e) {
             String stacktrace = ExceptionUtils.getStackTrace(e);
