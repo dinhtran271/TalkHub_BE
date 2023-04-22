@@ -6,4 +6,5 @@ public interface ITalkHubTagService {
     JsonObject create(JsonObject data);
     JsonObject getAllByTopic(long topicId);
     JsonObject delete(long tagId);
+    JsonObject getAll();
 }

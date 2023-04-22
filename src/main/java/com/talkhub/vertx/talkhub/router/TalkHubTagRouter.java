@@ -48,5 +48,16 @@ public class TalkHubTagRouter {
             rc.response().end(res.toString());
         }
     }
+    public static void getAll(RoutingContext rc) {
+        try {
+            JsonObject res = TalkHubServices.talkHubTagService.getAll();
+            rc.response().end(res.toString());
+        } catch (Exception e) {
+            String stacktrace = ExceptionUtils.getStackTrace(e);
+            DebugLogger.error(stacktrace);
+            JsonObject res = BaseResponse.createFullMessageResponse(1, "system_error");
+            rc.response().end(res.toString());
+        }
+    }
 }
 
