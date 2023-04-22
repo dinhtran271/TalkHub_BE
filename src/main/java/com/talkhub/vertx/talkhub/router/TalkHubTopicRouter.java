@@ -99,8 +99,9 @@ public class TalkHubTopicRouter {
 
     public static void getById(RoutingContext rc) {
         try {
+            long userId = Long.parseLong(rc.request().headers().get("userid"));
             long topicId = Long.parseLong(rc.request().getParam("topicid"));
-            JsonObject res = TalkHubServices.talkHubTopicService.getById(topicId);
+            JsonObject res = TalkHubServices.talkHubTopicService.getById(topicId, userId);
             rc.response().end(res.toString());
         } catch (Exception e) {
             String stacktrace = ExceptionUtils.getStackTrace(e);
@@ -129,7 +130,7 @@ public class TalkHubTopicRouter {
         try {
             long categoryId = Long.parseLong(rc.request().getParam("categoryid"));
             int page = Integer.parseInt(rc.request().getParam("page"));
-            int count = Integer.parseInt(rc.request().getParam("count"));
+            int count = 20;
             JsonObject res = TalkHubServices.talkHubTopicService.getAllByCategory(categoryId, page, count);
             rc.response().end(res.toString());
         } catch (Exception e) {
@@ -142,10 +143,49 @@ public class TalkHubTopicRouter {
 
     public static void getAllByTag(RoutingContext rc) {
         try {
-            String tag = rc.request().getParam("tag");
+            long tagId = Long.parseLong(rc.request().getParam("tagid"));
             int page = Integer.parseInt(rc.request().getParam("page"));
-            int count = Integer.parseInt(rc.request().getParam("count"));
-            JsonObject res = TalkHubServices.talkHubTopicService.getAllByTag(tag, page, count);
+            int count = 20;
+            JsonObject res = TalkHubServices.talkHubTopicService.getAllByTag(tagId, page, count);
+            rc.response().end(res.toString());
+        } catch (Exception e) {
+            String stacktrace = ExceptionUtils.getStackTrace(e);
+            DebugLogger.error(stacktrace);
+            JsonObject res = BaseResponse.createFullMessageResponse(1, "system_error");
+            rc.response().end(res.toString());
+        }
+    }
+
+    public static void getLatest(RoutingContext rc) {
+        try {
+            JsonObject res = TalkHubServices.talkHubTopicService.getLatest();
+            rc.response().end(res.toString());
+        } catch (Exception e) {
+            String stacktrace = ExceptionUtils.getStackTrace(e);
+            DebugLogger.error(stacktrace);
+            JsonObject res = BaseResponse.createFullMessageResponse(1, "system_error");
+            rc.response().end(res.toString());
+        }
+    }
+
+    public static void getPopularOnDay(RoutingContext rc) {
+        try {
+            JsonObject res = TalkHubServices.talkHubTopicService.getPopularOnDay();
+            rc.response().end(res.toString());
+        } catch (Exception e) {
+            String stacktrace = ExceptionUtils.getStackTrace(e);
+            DebugLogger.error(stacktrace);
+            JsonObject res = BaseResponse.createFullMessageResponse(1, "system_error");
+            rc.response().end(res.toString());
+        }
+    }
+
+    public static void filter(RoutingContext rc) {
+        try {
+            String str = rc.request().getParam("str", "");
+            int page = Integer.parseInt(rc.request().getParam("page", "1"));
+            int count = 20;
+            JsonObject res = TalkHubServices.talkHubTopicService.filter(str, page, count);
             rc.response().end(res.toString());
         } catch (Exception e) {
             String stacktrace = ExceptionUtils.getStackTrace(e);
@@ -158,7 +198,7 @@ public class TalkHubTopicRouter {
     public static void getAll(RoutingContext rc) {
         try {
             int page = Integer.parseInt(rc.request().getParam("page"));
-            int count = Integer.parseInt(rc.request().getParam("count"));
+            int count = 20;
             JsonObject res = TalkHubServices.talkHubTopicService.getAll(page, count);
             rc.response().end(res.toString());
         } catch (Exception e) {

@@ -12,6 +12,19 @@ import com.talkhub.util.sql.SQLJavaBridge;
 public class TalkHubBookmarkService implements ITalkHubBookmarkService{
 
     @Override
+    public boolean isMarked(long userId, long topicId) {
+        try {
+            SQLJavaBridge bridge = HikariClients.instance().defaulSQLJavaBridge();
+            String query = "SELECT * FROM th_bookmark WHERE userid=? AND topicid=?";
+            return bridge.queryExist(query, userId, topicId);
+        } catch (Exception e) {
+            String stacktrace = ExceptionUtils.getStackTrace(e);
+            DebugLogger.error(stacktrace);
+            return false;
+        }
+    }
+
+    @Override
     public JsonObject create(JsonObject data) {
         try {
             SQLJavaBridge bridge = HikariClients.instance().defaulSQLJavaBridge();
@@ -23,7 +36,7 @@ public class TalkHubBookmarkService implements ITalkHubBookmarkService{
         } catch (Exception e) {
             String stacktrace = ExceptionUtils.getStackTrace(e);
             DebugLogger.error(stacktrace);
-            return BaseResponse.createFullMessageResponse(1, "system_error", data);
+            return BaseResponse.createFullMessageResponse(1, "system_error");
         }
     }
 
@@ -31,7 +44,7 @@ public class TalkHubBookmarkService implements ITalkHubBookmarkService{
     public JsonObject delete(long userId, long topicId) {
         try {
             SQLJavaBridge bridge = HikariClients.instance().defaulSQLJavaBridge();
-            String query = "DELETE FROM th_bookmark WHERE userid = ? and topicid = ?";
+            String query = "DELETE FROM th_bookmark WHERE userid = ? AND topicid = ?";
             bridge.update(query, userId, topicId);
             return BaseResponse.createFullMessageResponse(0, "success");
         } catch (Exception e) {
