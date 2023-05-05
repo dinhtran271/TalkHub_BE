@@ -11,7 +11,7 @@ public interface ITalkHubTopicService {
     JsonObject getById(long topicId, long userId);
     JsonObject delete(long topicId);
     JsonObject getAllByCategory(long categoryId, int page, int count);
-    JsonObject getAllByTag(long tagId, int page, int count);
+    JsonObject getAllByTag(String tagName, int page, int count);
     JsonObject getAll(int page, int count);
     long getUserId(long topciid);
     JsonObject getLatest();

@@ -5,7 +5,6 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.CorsHandler;
-import io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine;
 
 import com.google.gson.JsonObject;
 import com.talkhub.util.file.FileUtil;
@@ -22,14 +21,10 @@ public class HttpServer extends AbstractVerticle {
     Router router = Router.router(vertx);
     crossAccessControl(router);
     router.route("/v1/test").handler(this::test);
-    TalkHubAPI.configAPI(router);
+    TalkHubAPI.config(router);
     httpServer = vertx.createHttpServer()
       .requestHandler(router)
       .listen(config.get("port").getAsInt()).result();
-  }
-
-  public void templateEngine(Router router) {
-    ThymeleafTemplateEngine engine = ThymeleafTemplateEngine.create(vertx);
   }
 
   private void test(RoutingContext rc) {

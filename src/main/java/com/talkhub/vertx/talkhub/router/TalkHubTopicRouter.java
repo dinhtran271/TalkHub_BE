@@ -143,10 +143,10 @@ public class TalkHubTopicRouter {
 
     public static void getAllByTag(RoutingContext rc) {
         try {
-            long tagId = Long.parseLong(rc.request().getParam("tagid"));
+            String tagName = rc.request().getParam("tag");
             int page = Integer.parseInt(rc.request().getParam("page"));
             int count = 20;
-            JsonObject res = TalkHubServices.talkHubTopicService.getAllByTag(tagId, page, count);
+            JsonObject res = TalkHubServices.talkHubTopicService.getAllByTag(tagName, page, count);
             rc.response().end(res.toString());
         } catch (Exception e) {
             String stacktrace = ExceptionUtils.getStackTrace(e);

@@ -59,8 +59,6 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.12.0")
     // https://mvnrepository.com/artifact/commons-logging/commons-logging
     implementation("commons-logging:commons-logging:1.2")
-    // https://mvnrepository.com/artifact/io.vertx/vertx-web-templ-thymeleaf
-    implementation("io.vertx:vertx-web-templ-thymeleaf:4.4.1")
 
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")

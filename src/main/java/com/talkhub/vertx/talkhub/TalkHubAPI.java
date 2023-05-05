@@ -13,7 +13,7 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 
 public class TalkHubAPI {
-public static void configAPI(Router router) {
+    public static void config(Router router) {
         authApi(router);
         profileAPI(router);
         categoryAPI(router);
@@ -22,9 +22,9 @@ public static void configAPI(Router router) {
         tagAPI(router);
         bookmarkAPI(router);
         notificationAPI(router);
-        }
+    }
 
-        private static void authApi(Router router) {
+    private static void authApi(Router router) {
         router.post("/ez/v1/register")
                 .handler(BodyHandler.create())
                 .handler(TalkHubAuthRouter::register);
@@ -37,9 +37,9 @@ public static void configAPI(Router router) {
         router.post("/ez/v1/refreshtoken")
                 .handler(BodyHandler.create())
                 .handler(TalkHubAuthRouter::refreshToken);
-        }
+    }
 
-        private static void profileAPI(Router router) {
+    private static void profileAPI(Router router) {
         router.post("/ez/v1/profile/create")
                 .handler(BodyHandler.create())
                 .handler(TalkHubAuthRouter::authorizeUser)
@@ -51,9 +51,9 @@ public static void configAPI(Router router) {
         router.get("/ez/v1/profile/getinfo")
                 .handler(TalkHubAuthRouter::authorizeUser)
                 .handler(TalkHubProfileRouter::getInfo);
-        }
+    }
 
-        private static void categoryAPI(Router router) {
+    private static void categoryAPI(Router router) {
         router.post("/ez/v1/category/create")
                 .handler(BodyHandler.create())
                 .handler(TalkHubAuthRouter::authorizeAdmin)
@@ -70,9 +70,9 @@ public static void configAPI(Router router) {
                 .handler(BodyHandler.create())
                 .handler(TalkHubAuthRouter::authorizeAdmin)
                 .handler(TalkHubCategoryRouter::delete);
-        }
+    }
 
-        private static void topicAPI(Router router) {
+    private static void topicAPI(Router router) {
         router.post("/ez/v1/topic/create")
                 .handler(BodyHandler.create())
                 .handler(TalkHubAuthRouter::authorizeUser)
@@ -119,9 +119,9 @@ public static void configAPI(Router router) {
         router.get("/ez/v1/topic/filter")
                 .handler(TalkHubAuthRouter::authorizeUser)
                 .handler(TalkHubTopicRouter::filter);
-        }
+    }
 
-        private static void postAPI(Router router) {
+    private static void postAPI(Router router) {
         router.post("/ez/v1/post/create")
                 .handler(BodyHandler.create())
                 .handler(TalkHubAuthRouter::authorizeUser)
@@ -140,10 +140,10 @@ public static void configAPI(Router router) {
         router.get("/ez/v1/post/getbytopic")
                 .handler(TalkHubAuthRouter::authorizeUser)
                 .handler(TalkHubPostRouter::getAllByTopic);
-                
-        }
 
-        private static void tagAPI(Router router) {
+    }
+
+    private static void tagAPI(Router router) {
         router.post("/ez/v1/tag/create")
                 .handler(BodyHandler.create())
                 .handler(TalkHubAuthRouter::authorizeUser)
@@ -152,10 +152,15 @@ public static void configAPI(Router router) {
                 .handler(BodyHandler.create())
                 .handler(TalkHubAuthRouter::authorizeUser)
                 .handler(TalkHubTagRouter::delete);
-        }
+        router.get("/ez/v1/tag/getall")
+                .handler(BodyHandler.create())
+                .handler(TalkHubAuthRouter::authorizeUser)
+                .handler(TalkHubTagRouter::getAll);
 
-        
-        private static void bookmarkAPI(Router router) {
+    }
+
+
+    private static void bookmarkAPI(Router router) {
         router.post("/ez/v1/bookmark/create")
                 .handler(BodyHandler.create())
                 .handler(TalkHubAuthRouter::authorizeUser)
@@ -167,13 +172,13 @@ public static void configAPI(Router router) {
         router.get("/ez/v1/bookmark/gettopicmarked")
                 .handler(BodyHandler.create())
                 .handler(TalkHubAuthRouter::authorizeUser)
-                .handler(TalkHubBookMarkRouter::getAllTopicBookmark);        
-        }
+                .handler(TalkHubBookMarkRouter::getAllTopicBookmark);
+    }
 
-        private static void notificationAPI(Router router) {
+    private static void notificationAPI(Router router) {
         router.get("/ez/v1/noti/getall")
                 .handler(BodyHandler.create())
                 .handler(TalkHubAuthRouter::authorizeUser)
-                .handler(TalkHubNotificationRouter::getAll);     
-        }
+                .handler(TalkHubNotificationRouter::getAll);
+    }
 }

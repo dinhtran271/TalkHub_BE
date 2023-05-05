@@ -10,8 +10,8 @@ import com.talkhub.util.sql.HikariClients;
 import com.talkhub.util.sql.SQLJavaBridge;
 import com.talkhub.util.string.StringUtil;
 
-public class TalkHubAuthService implements ITalkHubAuthService{
-  final static long ACCESS_TOKEN_EXPIRATION_TIME = 3600000l * 24 * 7;
+public class TalkHubAuthService implements ITalkHubAuthService {
+    final static long ACCESS_TOKEN_EXPIRATION_TIME = 3600000l * 24 * 7;
     final static long REFRESH_TOKEN_EXPIRATION_TIME = 3600000l * 24 * 30;
 
     public JsonObject register(JsonObject json){
@@ -34,7 +34,7 @@ public class TalkHubAuthService implements ITalkHubAuthService{
             boolean isExisted = bridge.queryExist(query, username);
 
             if(isExisted){
-                return BaseResponse.createFullMessageResponse(11, "user_exist");
+                return BaseResponse.createFullMessageResponse(12, "user_exist");
             }
 
             String refreshToken = StringUtil.generateRandomStringNumberCharacter(32);
@@ -61,7 +61,7 @@ public class TalkHubAuthService implements ITalkHubAuthService{
             return BaseResponse.createFullMessageResponse(1, "system_error");
         }
     }
-    
+
 
     public JsonObject generateLoginSession(JsonObject data, String deviceId, String sessionInfo) {
         try {

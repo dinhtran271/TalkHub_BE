@@ -44,7 +44,7 @@ public class TalkHubNotificationService implements ITalkHubNotificationService{
                 noti.addProperty("other_avatar", profile.get("avatar").getAsString());
                 JsonObject topic = TalkHubServices.talkHubTopicService.getById(topicId, userId).get("data").getAsJsonObject();
                 noti.addProperty("topic_title", topic.get("title").getAsString());
-            }   
+            }
             JsonObject data = new JsonObject();
             data.add("noti", notis);
             return BaseResponse.createFullMessageResponse(0, "success", data);

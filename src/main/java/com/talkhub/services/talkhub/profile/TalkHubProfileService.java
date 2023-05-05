@@ -71,7 +71,7 @@ public class TalkHubProfileService implements ITalkHubProfileService{
             SQLJavaBridge bridge = HikariClients.instance().defaulSQLJavaBridge();
             String query = "SELECT * FROM th_profile WHERE userid = ?";
             boolean isExist = bridge.queryExist(query, userId);
-            if (!isExist) 
+            if (!isExist)
                 create(userId, "user@0" + userId);
             JsonObject data = bridge.queryOne(query, userId);
             return BaseResponse.createFullMessageResponse(0, "success", data);
@@ -107,5 +107,5 @@ public class TalkHubProfileService implements ITalkHubProfileService{
             return BaseResponse.createFullMessageResponse(1, "system_error");
         }
     }
-    
+
 }

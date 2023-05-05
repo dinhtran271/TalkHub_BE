@@ -113,6 +113,7 @@ public class TalkHubPostService implements ITalkHubPostService{
             return BaseResponse.createFullMessageResponse(1, "system_error");
         }
     }
+
     @Override
     public long countPostOfTopic(long topcicId) {
         try {
@@ -126,4 +127,5 @@ public class TalkHubPostService implements ITalkHubPostService{
             return 0;
         }
     }
+
 }
