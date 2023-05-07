@@ -86,21 +86,9 @@ public class TalkHubProfileService implements ITalkHubProfileService{
     public JsonObject update(JsonObject data) {
         try {
             SQLJavaBridge bridge = HikariClients.instance().defaulSQLJavaBridge();
-            JsonObject profile = new JsonObject();
-            long userId = data.get("userid").getAsLong();
-            String nickName = data.get("nick_name").getAsString();
-            String email = data.get("email").getAsString();
-            String avatar = data.get("avatar").getAsString();
-            int age = data.get("age").getAsInt();
-            long likes = data.get("likes").getAsLong();
-            profile.addProperty("userid", userId);
-            profile.addProperty("nick_name", nickName);
-            profile.addProperty("email", email);
-            profile.addProperty("avatar", avatar);
-            profile.addProperty("age", age);
-            profile.addProperty("likes", likes);
-            bridge.updateObjectToDb("th_profile","userid", profile);
-            return BaseResponse.createFullMessageResponse(0, "success", profile);
+            data.addProperty("likes", 0);
+            bridge.updateObjectToDb("th_profile", "userid", data);
+            return BaseResponse.createFullMessageResponse(0, "success", data);
         } catch (Exception e) {
             String stacktrace = ExceptionUtils.getStackTrace(e);
             DebugLogger.error(stacktrace);
