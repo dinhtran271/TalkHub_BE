@@ -4,7 +4,7 @@
     "name": "easyinvest",
     "jdbcUrl": "jdbc:mariadb://103.145.63.98:3306/easyinvest?characterEncoding=UTF-8",
     "dataSource.database": "easyinvest",
-    "dataSource.user": "easyinvest",
-    "dataSource.password": "NJ$!@8943kjalq"
+    "dataSource.user": "ei",
+    "dataSource.password": "NGs45fd!lhj"
   }
 ]
